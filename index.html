@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>the wait is over</title>
+    <style>
+        body {
+            background-color: black;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .word {
+            position: absolute;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 10px 20px;
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            transition: all 0.1s ease-in-out;
+            text-align: center;
+        }
+
+        .word:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: scale(1.1);
+        }
+
+        .congrats {
+            font-size: 32px;
+            text-align: center;
+            margin-top: 70vh;
+            transform: translateY(-50%);
+            display: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="congrats" class="congrats">Apply to FPT</div>
+
+    <script>
+        let words = [
+            'That was', 'a massive welcome', 'but you know',
+            'what else is massive', 'LOWWWWWW'
+        ];
+
+        let currentIndex = 0;
+        let word = document.createElement('button');
+        word.textContent = words[currentIndex];
+        word.classList.add('word');
+        word.style.left = Math.random() * 80 + '%';
+        word.style.top = Math.random() * 80 + '%';
+        word.style.color = getRandomColor();
+        word.addEventListener('click', () => {
+            currentIndex++;
+            if (currentIndex < words.length) {
+                word.textContent = words[currentIndex];
+                word.style.fontFamily = getRandomFont();
+                word.style.left = Math.random() * 80 + '%';
+                word.style.top = Math.random() * 80 + '%';
+                word.style.color = getRandomColor();
+            } else {
+                document.getElementById('congrats').style.display = 'block';
+                word.remove(); // Remove the last word
+                // Immediately redirect to the target URL without any delay
+                window.location.href = 'https://inductions.festember.com/';
+            }
+        });
+        document.body.appendChild(word);
+
+        function getRandomColor() {
+            let letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function getRandomFont() {
+            let fonts = [
+                'Arial', 'Helvetica', 'Times New Roman', 'Courier New', 'Verdana',
+                'Georgia', 'Palatino Linotype', 'Book Antiqua', 'Impact', 'Arial Black',
+                'Trebuchet MS', 'Lucida Sans Unicode', 'Tahoma', 'Geneva',
+                'Century Gothic', 'Lucida Grande', 'MS Sans Serif', 'MS Serif', 'Apple Chancery'
+            ];
+            return fonts[Math.floor(Math.random() * fonts.length)];
+        }
+    </script>
+</body>
+</html>
